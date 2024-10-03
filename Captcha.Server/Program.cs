@@ -1,3 +1,9 @@
+using Captcha.Application.Services;
+using Captcha.Domain.Entities;
+using Captcha.Domain.Interfaces;
+using Captcha.Infrastructure.Data;
+using Captcha.Infrastructure.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace Captcha.Server
 {
@@ -11,8 +17,16 @@ namespace Captcha.Server
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+            builder.Services.AddScoped<IRepository<MousePositionData>, MousePositionDataRepository>();
+            builder.Services.AddScoped<MousePositionDataService>();
+            builder.Services.AddDbContext<Context>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString"))
+            );
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+
 
             var app = builder.Build();
 

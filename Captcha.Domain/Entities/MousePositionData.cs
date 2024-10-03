@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Captcha.Domain.ValueObjects;
 
 namespace Captcha.Domain.Entities
 {
     public class MousePositionData : BaseEntity
     {
-        public int[] X { get; set; }
-        public int[] Y { get; set; }    
-        public DateTime T { get; set; }
+        public PositionsData PositionsData { get; set; }
     }
 }
